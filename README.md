@@ -1,283 +1,305 @@
-Rev_Shop_Project
+# 📘 **RevShop Project**
 
-🧾 Project Summary
+## **Java Console-Based E-Commerce Application**
 
-RevShop is a secure, console-based e-commerce application built with Java 1.7 and Oracle 10g.
-It supports both buyers and sellers, allowing:
+---
 
-✔ Buyers to browse products, manage carts, place orders, review purchases, favorites, and receive notifications.
-✔ Sellers to manage inventory, products, orders, and receive alerts for low stock.
+## 🧾 **Project Summary**
 
-The architecture is layered and modular — making it maintainable and clearly separated between UI, business logic, data access, and persistence.
+RevShop is a secure console-based e-commerce application built using **Java 1.7**, **Oracle 10g Database**, and follows a **layered architecture (UI → Service → DAO → Database).**
 
-🚀 Features Implemented
-🛍 Buyer Features
+This project simulates the core functionality of an online marketplace where:
 
-✔ Register with email, password, security question/answer
-✔ Login and logout
-✔ Browse all products
-✔ Search by keyword and filter by category
-✔ Add / remove products to cart
-✔ View cart contents
-✔ Checkout with shipping/billing
-✔ Simulated payment methods (Card, UPI, COD)
-✔ View order history
-✔ Review and rate products
-✔ Save products as favorites
-✔ View and manage notifications
-✔ Forget password recovery
-✔ Change account password
+* **Buyers** can browse products, manage carts, place orders, review products, and receive notifications.
+* **Sellers** can manage inventory, add/update/delete products, view orders, and get alerts when stock is low.
 
-🏪 Seller Features
+It is designed to be modular and maintainable, allowing future expansion into web or microservices.
 
-✔ Register and Login
-✔ Add new products (price, discount, category)
-✔ Update existing products
-✔ Delete products
-✔ View seller’s own products
-✔ View orders containing seller’s products
-✔ View reviews for products
-✔ Receive low stock notifications
-✔ Manage persistent notifications
-✔ Change account password
+---
 
-📦 Architecture Overview
+## 🚀 **Features Implemented**
 
-RevShop follows a standard layered architecture:
+### 🛍 Buyer Features
 
+1. User registration with email, password, security question, and hint
+2. Login and logout
+3. Browse all products
+4. Search products by keyword and category
+5. Add/remove products to/from cart
+6. View cart
+7. Checkout with shipping and billing information
+8. Simulated payment methods (Card, UPI, COD)
+9. View order history
+10. Review and rate products
+11. Save products as favorites
+12. View and manage notifications
+13. Forget password recovery
+14. Change account password
+
+---
+
+### 🏪 Seller Features
+
+1. Seller registration and login
+2. Add new products (price, discount, category)
+3. Update product details
+4. Delete products
+5. View own products
+6. View orders containing seller’s products
+8. View product reviews
+9. Receive low-stock notifications
+10. Manage persistent notifications
+11. Change account password
+
+---
+
+## 📦 **Project Architecture**
+
+RevShop is developed using a **layered architecture**:
+
+```
 UI Layer (Menus)
-    ↓
-Service Layer (business logic)
-    ↓
-DAO Layer (data access)
-    ↓
-Oracle 10g Database
+ ↓
+Service Layer (Business Logic)
+ ↓
+DAO Layer (Database Interaction)
+ ↓
+Oracle 10g Database (Tables + Sequences)
+```
 
-Layer Responsibilities
+### **Layer Responsibilities**
 
-UI Layer
+**UI Layer**
 
-Classes: MainMenu, BuyerMenu, SellerMenu
+* Contains interactive menus and input/output with the user.
+* Classes: `MainMenu`, `BuyerMenu`, `SellerMenu`.
 
-Handles input/output and basic validation
+**Service Layer**
 
-Service Layer
+* Handles business logic and coordinates between UI and DAOs.
+* Classes: `UserService`, `ProductService`, `CartService`, `OrderService`, `ReviewService`, `FavoriteService`, `NotificationService`.
 
-Coordinators of business rules
+**DAO Layer**
 
-Classes: UserService, ProductService, CartService, OrderService, ReviewService, FavoriteService, NotificationService
+* Performs database operations (INSERT, SELECT, UPDATE, DELETE).
+* Example classes: `UserDAO`, `ProductDAO`, `CartDAO`, etc.
 
-DAO Layer
+**Database**
 
-Performs SQL queries and updates
+* Oracle 10g tables and sequences enforce integrity and generate IDs.
 
-Classes: UserDAO, ProductDAO, CartDAO, OrderDAO, etc.
+---
 
-Database
+## 🧠 **How Layers Interact**
 
-Oracle 10g tables + sequences
+Example flow:
 
-Referential constraints enforce integrity
+```
+User Input (UI) → Service Method → DAO SQL → Database
+```
 
-🧠 How the Layers Interact
-User Input (UI) → Service Method → DAO SQL → DB Storage
+Models (like `User`, `Product`, `Order`, etc.) pass between layers with data.
 
+---
 
-Models (like User, Product, Order, etc.) are passed between layers.
+## 🧬 **Entity Relationship Diagram (ERD)**
 
-🧬 Entity Relationship Diagram (ERD)
+Here’s the ASCII ERD illustrating your database:
 
-Here’s an ASCII version you can include directly in your README:
+```
+                           +----------------+
+                           |    user_1      |
+                           +----------------+
+                           | PK user_id     |
+                           | name           |
+                           | email          |
+                           | password       |
+                           | role           |
+                           | security_q     |
+                           | security_a     |
+                           | password_hint  |
+                           +----------------+
+                                   |
+             ---------------------------------------------
+             |                       |                     |
+             v                       v                     v
+     +---------------+       +---------------+     +----------------+
+     |  product_1    |       |   cart_1      |     | notifications_1|
+     +---------------+       +---------------+     +----------------+
+     | PK product_id |       | PK cart_id    |     | PK notification_id |
+     | seller_id (FK)|◄──────┤ buyer_id (FK) |     | user_id (FK)       |
+     | name          |       | product_id(FK)|     | message            |
+     | description   |       | quantity      |     | is_read            |
+     | category      |       +---------------+     | created_date       |
+     | price         |                             +--------------------+
+     | discountPrice |
+     | stock         |
+     | stockThreshold|
+     +---------------+
+             |
+             v
+     +----------------+
+     |   review_1     |
+     +----------------+
+     | PK review_id   |
+     | buyer_id (FK)  |
+     | product_id(FK) |
+     | rating         |
+     | comment        |
+     | review_date    |
+     +----------------+
 
-                               +----------------+
-                               |    user_1      |
-                               +----------------+
-                               | PK user_id     |
-                               | name           |
-                               | email          |
-                               | password       |
-                               | role           |
-                               | security_q     |
-                               | security_a     |
-                               | password_hint  |
-                               +----------------+
-                                       |
-                 ---------------------------------------------
-                 |                       |                     |
-                 v                       v                     v
-         +---------------+       +---------------+     +----------------+
-         |  product_1    |       |   cart_1      |     | notifications_1|
-         +---------------+       +---------------+     +----------------+
-         | PK product_id |       | PK cart_id    |     | PK notification_id |
-         | seller_id (FK)|◄──────┤ buyer_id (FK) |     | user_id (FK)       |
-         | name          |       | product_id(FK)|     | message            |
-         | description   |       | quantity      |     | is_read            |
-         | category      |       +---------------+     | created_date       |
-         | price         |                             +--------------------+
-         | discountPrice |
-         | stock         |
-         | stockThreshold|
-         +---------------+
-                 |
-                 |
-                 v
-         +----------------+
-         |   review_1     |
-         +----------------+
-         | PK review_id   |
-         | buyer_id (FK)  |
-         | product_id(FK) |
-         | rating         |
-         | comment        |
-         | review_date    |
-         +----------------+
+             |
+             v
+     +----------------+
+     | favorite_1     |
+     +----------------+
+     | buyer_id (FK)  |
+     | product_id(FK) |
+     +----------------+
 
-                 |
-                 v
-         +----------------+
-         | favorite_1     |
-         +----------------+
-         | buyer_id (FK)  |
-         | product_id(FK) |
-         +----------------+
+             |
+             v
+     +----------------+
+     |   orders_1     |
+     +----------------+
+     | PK order_id    |
+     | buyer_id (FK)  |
+     | total_amount   |
+     | order_date     |
+     | status         |
+     | shipping_addr  |
+     | billing_addr   |
+     +----------------+
+             |
+             v
+     +----------------+
+     | order_item_1   |
+     +----------------+
+     | PK order_item_id |
+     | order_id (FK)    |
+     | product_id(FK)   |
+     | quantity         |
+     | price_each       |
+     +----------------+
+```
 
-                 |
-                 v
-         +----------------+
-         |   orders_1     |
-         +----------------+
-         | PK order_id    |
-         | buyer_id (FK)  |
-         | total_amount   |
-         | order_date     |
-         | status         |
-         | shipping_addr  |
-         | billing_addr   |
-         +----------------+
-                 |
-                 v
-         +----------------+
-         | order_item_1   |
-         +----------------+
-         | PK order_item_id |
-         | order_id (FK)    |
-         | product_id(FK)   |
-         | quantity         |
-         | price_each       |
-         +----------------+
+> You can include a proper image in your README by exporting this ERD in tools like dbdiagram.io and then adding with Markdown:
+>
+> `![RevShop ERD](images/RevShop_ERD.png)`
 
+---
 
-Tip: You can include a proper image in your README using Markdown if you export the ERD from a tool.
+## 🛠 **Database Structure Summary**
 
-Example:
+| Table             | Purpose                       |
+| ----------------- | ----------------------------- |
+| `user_1`          | Stores buyers and sellers     |
+| `product_1`       | Product catalog               |
+| `cart_1`          | Shopping cart items           |
+| `orders_1`        | Order headers                 |
+| `order_item_1`    | Individual order lines        |
+| `review_1`        | Customer product reviews      |
+| `favorite_1`      | Saved favorites               |
+| `notifications_1` | Persistent user notifications |
 
-![RevShop ERD](docs/RevShop_ERD.png)
+Each table gets primary key values from sequences like:
 
-🛠 Database Structure Summary
-Table	Purpose
-user_1	Stores users (buyers & sellers)
-product_1	Product catalog
-cart_1	Items added to cart
-orders_1	Order header records
-order_item_1	Order_line items
-review_1	Buyer reviews
-favorite_1	Saved favorites
-notifications_1	Persistent alerts
-
-Each table uses sequences such as:
-
+```
 user_seq, product_seq, cart_seq, order_seq, order_item_seq, review_seq, notification_seq
+```
 
-🧩 Input Validation & Logging
-Validation
+---
+
+## 🧩 **Input Validation & Logging**
 
 Before database calls, inputs are validated:
 
 ✔ Valid email format
-✔ Valid password strength
-✔ Existing product IDs
-✔ Quantity ≤ current stock
+✔ Password requirements
+✔ Check product existence before cart operations
+✔ Ensure quantity ≤ stock
 
-This prevents database errors and improves user experience.
+Logging is done using **Log4j**, with both console and file logging enabled.
 
-Logging (Log4j + Commons Logging)
+Example configuration (log4j.properties):
 
-You included this log4j.properties to capture logs:
-
-# Root logger
+```
 log4j.rootLogger=DEBUG, console, file
-
-# Console appender
 log4j.appender.console=org.apache.log4j.ConsoleAppender
-log4j.appender.console.Target=System.out
-log4j.appender.console.layout=org.apache.log4j.PatternLayout
-log4j.appender.console.layout.ConversionPattern=%d{ISO8601} [%p] %c: %m%n
-
-# File appender
+...
 log4j.appender.file=org.apache.log4j.RollingFileAppender
-log4j.appender.file.File=logs/revshop.log
-log4j.appender.file.MaxFileSize=5MB
-log4j.appender.file.MaxBackupIndex=3
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-log4j.appender.file.layout.ConversionPattern=%d{ISO8601} [%p] %c: %m%n
+...
+```
 
+This helps in debugging and keeping track of application behavior.
 
-Console logging helps during development
+---
 
-File logging (logs/revshop.log) gives audit trail
+## 🧪 **Running the Project**
 
-🧪 Running the Project
-Prerequisites
+### Prerequisites:
 
 ✔ Java 1.7
 ✔ Eclipse Indigo
 ✔ Oracle 10g database
-✔ JDBC driver in project classpath
+✔ JDBC driver included in project
+✔ log4j.properties in `src/`
 
-Steps
+### Steps:
 
-Create tables in Oracle
+1. Create the database tables and sequences in Oracle
+2. Configure Oracle XE connection parameters
+3. Run `RevShop.main()` class
+4. Interact using the console menu
 
-Create sequences for ID generation
+---
 
-Place log4j.properties in src/
+## 🧠 **How to Use the Menus**
 
-Run RevShop.main() class
+### Main Menu:
 
-Interact via console menus
-
-🧠 How to Use Menus
-Main Menu
-1. Buyer Register
-2. Buyer Login
-3. Seller Register
-4. Seller Login
-5. Forgot Password
+```
+1. Buyer Register  
+2. Buyer Login  
+3. Seller Register  
+4. Seller Login  
+5. Forgot Password  
 0. Exit
+```
 
-Buyer Dashboard Exercise
+After buyer login, available options include:
 
-After login:
-
-Browse products → 1
-Add to cart → 5
-View cart → 4
-Checkout → 7
-View favorites → 13
-View notifications → 12
+```
+Browse products → 1  
+Add to cart → 5  
+View cart → 4  
+Checkout → 7  
+View favorites → 13  
+View notifications → 12  
 Change password → 15
+```
 
-📌 Future Enhancements
+---
 
-✔ Product sorting (by price, rating)
-✔ Filter by price range
-✔ Admin panel for global management
-✔ Web/Mobile front-end integration
-✔ Unit tests (JUnit) for more classes
+## 📌 **Future Enhancements**
 
-📄 Contact / Credits
+These features were considered but are not implemented in this version:
 
-Developed by: Prudhvi Teja Garapati-2354
-Language: Java 1.7
-Database: Oracle 10g
-IDE: Eclipse Indigo
+✔ Product sorting by price/rating
+✔ More advanced filters (price range, category facets)
+✔ Admin panel for system oversight
+✔ Web or mobile front-end integration
+✔ Real payment gateway integration
+✔ Comprehensive unit & integration tests for all modules
+
+---
+
+## 📄 **Project Details / Credits**
+
+* **Developed by**: Prudhvi Teja Garapati – 2354
+* **Language**: Java 1.7
+* **Database**: Oracle 10g
+* **IDE**: Eclipse Indigo
+
+---
