@@ -1,0 +1,42 @@
+2026-01-30 02:30:09,489 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=prudhvi@.com
+2026-01-30 02:30:09,779 [INFO] com.revshop.service.UserService: User registered with security successfully: email=prudhvi@.com
+2026-01-30 02:31:30,788 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=prudhvi123@gmail.com
+2026-01-30 02:31:30,852 [INFO] com.revshop.service.UserService: User registered with security successfully: email=prudhvi123@gmail.com
+2026-01-30 02:31:54,257 [INFO] com.revshop.service.UserService: Login attempt: email=prudhvi123@gmail.com
+2026-01-30 02:31:54,316 [INFO] com.revshop.service.UserService: Login successful: userId=5
+2026-01-30 02:31:54,336 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=5
+2026-01-30 02:31:54,379 [DEBUG] com.revshop.service.NotificationService: Found 0 notifications for userId=5
+2026-01-30 02:32:07,924 [INFO] com.revshop.service.CartService: Viewing cart for buyerId: 5
+2026-01-30 02:32:07,973 [DEBUG] com.revshop.service.CartService: Cart items found: 0
+2026-01-30 02:32:25,234 [INFO] com.revshop.service.FavoriteService: Retrieving favorites for buyerId=5
+2026-01-30 02:32:25,278 [DEBUG] com.revshop.service.FavoriteService: Number of favorites found: 0
+2026-01-30 02:32:48,097 [INFO] com.revshop.service.UserService: Change password requested for userId=5
+2026-01-30 02:32:48,178 [INFO] com.revshop.service.UserService: Password changed successfully for userId=5
+2026-01-30 02:33:17,440 [INFO] com.revshop.service.UserService: Login attempt: email=prudhvi123@gmail.com
+2026-01-30 02:33:17,474 [WARN] com.revshop.service.UserService: Login failed: invalid credentials for email=prudhvi123@gmail.com
+2026-01-30 02:34:45,300 [INFO] com.revshop.service.UserService: Login attempt: email=prudhvi123@gmail.com
+2026-01-30 02:34:45,336 [INFO] com.revshop.service.UserService: Login successful: userId=5
+2026-01-30 02:34:45,336 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=5
+2026-01-30 02:34:45,368 [DEBUG] com.revshop.service.NotificationService: Found 0 notifications for userId=5
+2026-01-30 02:34:56,438 [INFO] com.revshop.service.FavoriteService: Adding favorite: buyerId=5, productId=12
+2026-01-30 02:34:56,512 [WARN] com.revshop.service.FavoriteService: Failed to add favorite: buyerId=5, productId=12
+2026-01-30 02:35:15,909 [INFO] com.revshop.service.CartService: Viewing cart for buyerId: 5
+2026-01-30 02:35:15,951 [DEBUG] com.revshop.service.CartService: Cart items found: 0
+2026-01-30 02:37:37,227 [INFO] com.revshop.service.UserService: Login attempt: email=prudhvi123@gmail.com
+2026-01-30 02:37:37,511 [INFO] com.revshop.service.UserService: Login successful: userId=5
+2026-01-30 02:37:37,514 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=5
+2026-01-30 02:37:37,528 [DEBUG] com.revshop.service.NotificationService: Found 0 notifications for userId=5
+2026-01-30 02:38:15,041 [INFO] com.revshop.service.FavoriteService: Adding favorite: buyerId=5, productId=1
+2026-01-30 02:38:15,102 [INFO] com.revshop.service.FavoriteService: Favorite added successfully: buyerId=5, productId=1
+2026-01-30 02:40:14,372 [INFO] com.revshop.service.ProductService: Fetching product by ID: 1
+2026-01-30 02:40:14,410 [DEBUG] com.revshop.service.ProductService: Product found: Pins
+2026-01-30 02:40:14,410 [INFO] com.revshop.service.ReviewService: Fetching reviews for productId=1
+2026-01-30 02:40:14,441 [DEBUG] com.revshop.service.ReviewService: Found 1 reviews for productId=1
+2026-01-30 02:40:33,296 [INFO] com.revshop.service.ProductService: Searching products with keyword: pins
+2026-01-30 02:40:33,338 [DEBUG] com.revshop.service.ProductService: Products found for keyword 'pins': 1
+2026-01-30 02:41:00,528 [INFO] com.revshop.service.ReviewService: Attempting to add review: buyerId=5, productId=1, rating=3
+2026-01-30 02:41:00,590 [INFO] com.revshop.service.ReviewService: Review added successfully for productId=1 by buyerId=5
+2026-01-30 02:41:15,805 [INFO] com.revshop.service.FavoriteService: Removing favorite: buyerId=5, productId=1
+2026-01-30 02:41:15,858 [INFO] com.revshop.service.FavoriteService: Favorite removed successfully: buyerId=5, productId=1
+2026-01-30 09:25:31,681 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=Anjan@123gmail.com
+2026-01-30 09:25:32,004 [INFO] com.revshop.service.UserService: User registered with security successfully: email=Anjan@123gmail.com
