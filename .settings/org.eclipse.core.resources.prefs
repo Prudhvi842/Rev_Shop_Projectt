@@ -1,4 +1,4 @@
-#Fri Jan 30 02:18:30 IST 2026
+#Fri Jan 30 18:20:31 IST 2026
 eclipse.preferences.version=1
 encoding//src/com/revshop/dbtest/Dbtest.java=UTF-8
 encoding//src/com/revshop/dbutil/DB_Connection.java=UTF-8
@@ -6,6 +6,7 @@ encoding//src/com/revshop/service/CartService.java=UTF-8
 encoding//src/com/revshop/service/NotificationService.java=UTF-8
 encoding//src/com/revshop/service/OrderService.java=UTF-8
 encoding//src/com/revshop/service/ProductService.java=UTF-8
+encoding//src/com/revshop/service/UserService.java=UTF-8
 encoding//src/com/revshop/ui/BuyerMenu.java=UTF-8
 encoding//src/com/revshop/ui/MainMenu.java=UTF-8
 encoding//src/com/revshop/ui/SellerMenu.java=UTF-8

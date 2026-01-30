@@ -1,7 +1,6 @@
 package com.revshop.ui;
 
 import java.util.Scanner;
-
 import com.revshop.service.NotificationService;
 import com.revshop.service.UserService;
 import com.revshop.model.User;
@@ -37,24 +36,49 @@ public class MainMenu {
         }
     }
 
+    // --- Validation Helpers ---
+
+    private boolean isValidEmail(String email) {
+        if (email == null || email.trim().isEmpty()) return false;
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+
+    private boolean isValidPassword(String pass) {
+        if (pass == null || pass.trim().isEmpty()) return false;
+        if (pass.length() < 6) return false;
+        return pass.matches("^(?=.*[A-Za-z])(?=.*\\d).+$");
+    }
+
+    // --- Registration & Login ---
+
     private void buyerRegister() {
         System.out.println("\n=== Buyer Registration ===");
 
         System.out.print("Name: ");
         String name = sc.nextLine();
+        if (name.trim().isEmpty()) {
+            System.out.println("Name cannot be empty!");
+            return;
+        }
 
         System.out.print("Email: ");
         String email = sc.nextLine();
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format!");
+            return;
+        }
 
         System.out.print("Password: ");
         String pass = sc.nextLine();
+        if (!isValidPassword(pass)) {
+            System.out.println("Password must be at least 6 chars, with letters and numbers!");
+            return;
+        }
 
         System.out.print("Security Question (e.g., Your favorite teacher?): ");
         String secQ = sc.nextLine();
-
         System.out.print("Security Answer: ");
         String secA = sc.nextLine();
-
         System.out.print("Password Hint: ");
         String hint = sc.nextLine();
 
@@ -68,26 +92,31 @@ public class MainMenu {
             : "✘ Buyer registration failed!");
     }
 
-
     private void buyerLogin() {
         System.out.println("\n=== Buyer Login ===");
+
         System.out.print("Email: ");
         String email = sc.nextLine();
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format!");
+            return;
+        }
+
         System.out.print("Password: ");
         String pass = sc.nextLine();
+        if (!isValidPassword(pass)) {
+            System.out.println("Invalid password format!");
+            return;
+        }
 
         User user = userService.loginUser(email, pass);
         if (user != null && "BUYER".equals(user.getRole())) {
             System.out.println("✔ Login successful! Welcome " + user.getName());
-
-            // Show unread notifications
             showNotificationsOnLogin(user.getUserId());
-
             new BuyerMenu(user).show();
         } else {
             System.out.println("✘ Invalid credentials or not a buyer!");
         }
-
     }
 
     private void sellerRegister() {
@@ -95,21 +124,30 @@ public class MainMenu {
 
         System.out.print("Name: ");
         String name = sc.nextLine();
+        if (name.trim().isEmpty()) {
+            System.out.println("Name cannot be empty!");
+            return;
+        }
 
         System.out.print("Email: ");
         String email = sc.nextLine();
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format!");
+            return;
+        }
 
         System.out.print("Password: ");
         String pass = sc.nextLine();
+        if (!isValidPassword(pass)) {
+            System.out.println("Password must be at least 6 chars, with letters and numbers!");
+            return;
+        }
 
-        // --- New fields for password recovery ---
         System.out.print("Security Question (e.g., What is your pet’s name?): ");
         String secQ = sc.nextLine();
-
         System.out.print("Security Answer: ");
         String secA = sc.nextLine();
-
-        System.out.print("Password Hint (short hint to help you remember): ");
+        System.out.print("Password Hint: ");
         String hint = sc.nextLine();
 
         boolean success = userService.registerUserWithSecurity(
@@ -122,27 +160,33 @@ public class MainMenu {
             : "✘ Seller registration failed!");
     }
 
-
     private void sellerLogin() {
         System.out.println("\n=== Seller Login ===");
+
         System.out.print("Email: ");
         String email = sc.nextLine();
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format!");
+            return;
+        }
+
         System.out.print("Password: ");
         String pass = sc.nextLine();
+        if (!isValidPassword(pass)) {
+            System.out.println("Invalid password format!");
+            return;
+        }
 
         User user = userService.loginUser(email, pass);
         if (user != null && "SELLER".equals(user.getRole())) {
             System.out.println("✔ Login successful! Welcome " + user.getName());
-
             showNotificationsOnLogin(user.getUserId());
-
             new SellerMenu(user).show();
+        } else {
+            System.out.println("✘ Invalid credentials or not a seller!");
         }
-        else{
-        	System.out.println("Invalid credentials or not a seller");
-        }
-
     }
+
     private void showNotificationsOnLogin(int userId) {
         NotificationService notificationService = new NotificationService();
         java.util.List<com.revshop.model.Notification> notis =
@@ -160,6 +204,7 @@ public class MainMenu {
         if (!hasNew) System.out.println("No new notifications.");
         System.out.println();
     }
+
     private void forgotPasswordUI() {
         Scanner sc = new Scanner(System.in);
 
@@ -167,7 +212,11 @@ public class MainMenu {
         System.out.print("Enter your registered email: ");
         String email = sc.nextLine();
 
-        // Fetch password hint
+        if (!isValidEmail(email)) {
+            System.out.println("Invalid email format!");
+            return;
+        }
+
         String hint = userService.getPasswordHint(email);
         if (hint == null) {
             System.out.println("Email not found!");
@@ -187,6 +236,10 @@ public class MainMenu {
 
         System.out.print("Enter new password: ");
         String newPass = sc.nextLine();
+        if (!isValidPassword(newPass)) {
+            System.out.println("New password must be at least 6 chars, with letters and numbers!");
+            return;
+        }
 
         boolean ok = userService.recoverPassword(email, answer, newPass);
         System.out.println(ok ? "✔ Password has been reset!" : "✘ Answer didn’t match!");

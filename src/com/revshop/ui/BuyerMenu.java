@@ -126,12 +126,30 @@ public class BuyerMenu {
     private void addToCartUI() {
         System.out.print("Enter Product ID to add: ");
         int pid = Integer.parseInt(sc.nextLine());
+
+        // Check if product exists
+        Product p = productService.getProductById(pid);
+        if (p == null) {
+            System.out.println("❌ Product ID " + pid + " not found!");
+            return;
+        }
+
         System.out.print("Enter quantity: ");
         int qty = Integer.parseInt(sc.nextLine());
+
+        if (qty <= 0) {
+            System.out.println("❌ Quantity must be at least 1!");
+            return;
+        }
+        if (qty > p.getStock()) {
+            System.out.println("❌ Not enough stock available! Stock: " + p.getStock());
+            return;
+        }
 
         boolean added = cartService.addToCart(buyer.getUserId(), pid, qty);
         System.out.println(added ? "✔ Added to cart!" : "✘ Failed to add to cart.");
     }
+
 
     private void removeFromCartUI() {
         System.out.print("Enter Cart ID to remove: ");
@@ -216,7 +234,7 @@ public class BuyerMenu {
 
         Product p = productService.getProductById(pid);
         if (p == null) {
-            System.out.println("❌ Product not found!");
+            System.out.println("❌ Product ID " + pid + " not found!");
             return;
         }
 

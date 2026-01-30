@@ -40,3 +40,52 @@
 2026-01-30 02:41:15,858 [INFO] com.revshop.service.FavoriteService: Favorite removed successfully: buyerId=5, productId=1
 2026-01-30 09:25:31,681 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=Anjan@123gmail.com
 2026-01-30 09:25:32,004 [INFO] com.revshop.service.UserService: User registered with security successfully: email=Anjan@123gmail.com
+2026-01-30 12:46:46,395 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=prudhvi@gmail.com
+2026-01-30 12:46:46,846 [ERROR] com.revshop.service.UserService: User registration with security failed: email=prudhvi@gmail.com
+2026-01-30 12:47:41,080 [INFO] com.revshop.service.UserService: Attempting user registration with security fields: email=prudhvitejaki@gmail.com
+2026-01-30 12:47:41,132 [INFO] com.revshop.service.UserService: User registered with security successfully: email=prudhvitejaki@gmail.com
+2026-01-30 12:48:01,237 [INFO] com.revshop.service.UserService: Login attempt: email=prudhvitejaki@gmail.com
+2026-01-30 12:48:01,329 [INFO] com.revshop.service.UserService: Login successful: userId=8
+2026-01-30 12:48:01,337 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=8
+2026-01-30 12:48:01,377 [DEBUG] com.revshop.service.NotificationService: Found 0 notifications for userId=8
+2026-01-30 12:48:24,511 [INFO] com.revshop.service.CartService: Viewing cart for buyerId: 8
+2026-01-30 12:48:24,544 [DEBUG] com.revshop.service.CartService: Cart items found: 0
+2026-01-30 12:48:39,754 [INFO] com.revshop.service.CartService: Adding to cart - buyerId: 8, productId: 2, qty: 500
+2026-01-30 12:48:39,809 [INFO] com.revshop.service.CartService: Added to cart successfully - cartId: 0
+2026-01-30 12:49:04,262 [INFO] com.revshop.service.CartService: Adding to cart - buyerId: 8, productId: 4, qty: 5000
+2026-01-30 12:49:04,311 [INFO] com.revshop.service.CartService: Added to cart successfully - cartId: 0
+2026-01-30 12:49:21,046 [INFO] com.revshop.service.CartService: Adding to cart - buyerId: 8, productId: 678, qty: 8993
+2026-01-30 12:49:21,153 [ERROR] com.revshop.service.CartService: Failed to add to cart - buyerId: 8, productId: 678
+2026-01-30 18:27:09,977 [INFO] com.revshop.service.UserService: Login attempt: email=Dhanu@gmail.com
+2026-01-30 18:27:10,023 [WARN] com.revshop.service.UserService: Login failed: invalid credentials for email=Dhanu@gmail.com
+2026-01-30 18:27:46,113 [INFO] com.revshop.service.UserService: Login attempt: email=Dhanu@gmail.com
+2026-01-30 18:27:46,136 [WARN] com.revshop.service.UserService: Login failed: invalid credentials for email=Dhanu@gmail.com
+2026-01-30 18:28:27,131 [INFO] com.revshop.service.UserService: Login attempt: email=Dhanu@gmail.com
+2026-01-30 18:28:27,167 [WARN] com.revshop.service.UserService: Login failed: invalid credentials for email=Dhanu@gmail.com
+2026-01-30 18:28:36,313 [INFO] com.revshop.service.UserService: Fetching password hint for email=Dhanu@gmail.com
+2026-01-30 18:28:36,333 [WARN] com.revshop.service.UserService: No user found for password hint: email=Dhanu@gmail.com
+2026-01-30 18:30:25,477 [INFO] com.revshop.service.UserService: Login attempt: email=dhanu@gmail.com
+2026-01-30 18:30:25,511 [INFO] com.revshop.service.UserService: Login successful: userId=9
+2026-01-30 18:30:25,511 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=9
+2026-01-30 18:30:25,543 [DEBUG] com.revshop.service.NotificationService: Found 0 notifications for userId=9
+2026-01-30 19:12:32,957 [INFO] com.revshop.service.UserService: Login attempt: email=bharath@gmail.com
+2026-01-30 19:12:33,155 [INFO] com.revshop.service.UserService: Login successful: userId=1
+2026-01-30 19:12:33,155 [INFO] com.revshop.service.NotificationService: Retrieving notifications for userId=1
+2026-01-30 19:12:33,180 [DEBUG] com.revshop.service.NotificationService: Found 2 notifications for userId=1
+2026-01-30 19:12:33,180 [INFO] com.revshop.service.NotificationService: Marking notification as read: notificationId=5
+2026-01-30 19:12:33,196 [INFO] com.revshop.service.NotificationService: Marked notificationId=5 as read
+2026-01-30 19:12:33,196 [INFO] com.revshop.service.NotificationService: Marking notification as read: notificationId=4
+2026-01-30 19:12:33,229 [INFO] com.revshop.service.NotificationService: Marked notificationId=4 as read
+2026-01-30 19:13:15,215 [INFO] com.revshop.service.ProductService: Adding new product: Tennis balls
+2026-01-30 19:13:15,276 [INFO] com.revshop.service.ProductService: Product added successfully with ID: 18
+2026-01-30 19:13:54,882 [INFO] com.revshop.service.ProductService: Adding new product: Bat
+2026-01-30 19:13:54,943 [INFO] com.revshop.service.ProductService: Product added successfully with ID: 19
+2026-01-30 19:14:01,150 [INFO] com.revshop.service.ProductService: Fetching products for sellerId: 1
+2026-01-30 19:14:01,188 [DEBUG] com.revshop.service.ProductService: Products found for sellerId 1: 12
+2026-01-30 19:15:03,714 [INFO] com.revshop.service.OrderService: Fetching orders for sellerId=1
+2026-01-30 19:37:56,956 [INFO] com.revshop.service.ReviewService: Attempting to add review: buyerId=1, productId=1, rating=5
+2026-01-30 19:37:56,956 [INFO] com.revshop.service.ReviewService: Review added successfully for productId=1 by buyerId=1
+2026-01-30 19:37:56,956 [INFO] com.revshop.service.ReviewService: Fetching reviews for productId=1
+2026-01-30 19:37:56,956 [DEBUG] com.revshop.service.ReviewService: Found 1 reviews for productId=1
+2026-01-30 19:37:56,956 [INFO] com.revshop.service.ReviewService: Attempting to add review: buyerId=1, productId=1, rating=6
+2026-01-30 19:37:56,956 [WARN] com.revshop.service.ReviewService: Invalid rating value (6) for productId=1

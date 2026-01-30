@@ -80,7 +80,12 @@ public class UserService {
             String name, String email, String password, String role,
             String secQ, String secA, String hint
     ) {
-        logger.info("Attempting user registration with security fields: email=" + email);
+        // email format likely valid already in UI
+        User existing = userDAO.getUserByEmail(email.trim().toLowerCase());
+        if (existing != null) {
+            System.out.println("❌ Email already exists! Use a different email.");
+            return false;
+        }
 
         User user = new User();
         user.setName(name.trim());
@@ -91,14 +96,9 @@ public class UserService {
         user.setSecurityAnswer(secA);
         user.setPasswordHint(hint);
 
-        boolean success = userDAO.addUser(user);
-        if (success) {
-            logger.info("User registered with security successfully: email=" + email);
-        } else {
-            logger.error("User registration with security failed: email=" + email);
-        }
-        return success;
+        return userDAO.addUser(user);
     }
+
 
     public String getPasswordHint(String email) {
         logger.info("Fetching password hint for email=" + email);
